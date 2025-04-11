@@ -1,0 +1,3 @@
+data_loader/wisdm-dataset/*
+
+data_loader/wsidm.parquet
