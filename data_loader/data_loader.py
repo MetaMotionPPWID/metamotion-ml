@@ -3,13 +3,13 @@ from tqdm import tqdm
 
 
 class TimeWindowSegmenter:
-    def __init__(self, df, window_size=10, sampling_rate=20, step_size=10, time_column='Timestamp', id_column='Subject-id', activity_column='Activity Label'):
+    def __init__(self, df_path, window_size=10, sampling_rate=20, step_size=10, time_column='Timestamp', id_column='Subject-id', activity_column='Activity Label'):
         self.window_size = window_size  # in seconds
         self.step_size = step_size      # in seconds
         self.time_column = time_column
         self.id_column = id_column
         self.activity_column = activity_column
-        self.df = df.copy()
+        self.df = pd.read_parquet(df_path)
         self.fix_timestamps()
         self.sampling_rate = sampling_rate
 
