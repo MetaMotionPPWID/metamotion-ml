@@ -10,9 +10,20 @@ class TimeWindowSegmenter:
         self.id_column = id_column
         self.activity_column = activity_column
         self.df = pd.read_parquet(df_path)
-        self.fix_timestamps()
+        self._clean_columns()
+        self._fix_timestamps()
         self.sampling_rate = sampling_rate
 
+    def _clean_columns(self):
+        for col in ['ac_z', 'g_z']:
+            if col in self.df.columns:
+                self.df[col] = (
+                    self.df[col]
+                    .astype(str)
+                    .str.replace(';', '', regex=False)
+                    .str.extract(r'([-+]?\d*\.\d+|\d+)')[0]  # tylko liczba
+                    .astype(float)
+                )
 
     def _fix_unix_timestamp(self, timestamp_series):
         """
@@ -27,7 +38,7 @@ class TimeWindowSegmenter:
 
         return ts_str.apply(safe_convert)
 
-    def fix_timestamps(self):
+    def _fix_timestamps(self):
         print("fix timestamps")
         self.df[self.time_column] = self._fix_unix_timestamp(self.df[self.time_column])
         self.df.sort_values(by=[self.id_column, self.activity_column, self.time_column], inplace=True)
