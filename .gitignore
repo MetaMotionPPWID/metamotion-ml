@@ -1,3 +1,7 @@
 data_loader/wisdm-dataset/*
 
 data_loader/wsidm.parquet
+
+__pycache__/
+*.pyc
+*.pyo
