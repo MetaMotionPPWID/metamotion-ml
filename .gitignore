@@ -1,7 +1,12 @@
-data_loader/wisdm-dataset/*
+data_loader/wisdm-dataset/
+data_loader/real_world_2016.parquet
+realworld2016_dataset/
 
 data_loader/wsidm.parquet
 
 __pycache__/
 *.pyc
 *.pyo
+venv/
+.venv/
+test_dataset/
