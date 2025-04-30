@@ -87,7 +87,7 @@ class TimeWindowSegmenter:
             group[numeric_cols] = group[numeric_cols].interpolate(method='linear')
             group[const_cols] = group[const_cols].ffill().bfill()
             group = group.reset_index().rename(columns={'index': self.time_column})
-            group[self.time_column] = pd.to_datetime(group[self.time_column])
+            group[self.time_column] = pd.to_datetime(group[self.time_column], unit='ms')
             group = group.set_index(self.time_column)
             numeric_cols = group.select_dtypes(include='number').columns
             group_resampled = group[numeric_cols].resample(f"{target_period_ms}ms").mean()

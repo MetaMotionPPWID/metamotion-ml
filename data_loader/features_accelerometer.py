@@ -1,17 +1,18 @@
 import numpy as np
 
-def extract_acc_features(window):
+def extract_acc_features(window, axes=['ac_x', 'ac_y', 'ac_z']):
     """
     Wyciąga cechy statystyczne z kolumn ac_x, ac_y, ac_z z ramki `window`.
 
     Parametry:
         window (pd.DataFrame): Dane z jednego okna czasowego, z kolumnami 'ac_x', 'ac_y', 'ac_z'
-
+        axes (list): Lista osi, z których mają być wyciągnięte cechy
+        
     Zwraca:
         dict: cechy statystyczne
     """
     features = {}
-    axes = ['ac_x', 'ac_y', 'ac_z']
+
 
     for axis in axes:
         data = window[axis].values

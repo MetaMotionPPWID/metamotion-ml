@@ -37,5 +37,5 @@ def calculate_statistics_multi_axis(window, axes):
             print(f"Warning: Column '{axis}' not found in the DataFrame. Skipping...")
             continue
 
-        stats[axis] = calculate_statistics(window, axis)
+        stats[f"std_{axis}"], stats[f"abs_{axis}"], stats[f"var_{axis}"] = calculate_statistics(window, axis)
     return stats

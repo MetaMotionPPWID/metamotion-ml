@@ -7,7 +7,7 @@ def autocorr(x, lag=1):
         return 0
     return np.corrcoef(x[:-lag], x[lag:])[0, 1]
 
-def extract_temporal_features(window):
+def extract_temporal_features(window, axes = ['ac_x', 'ac_y', 'ac_z']):
     """
     Wyciąga cechy czasowe z akcelerometru z pojedynczego okna czasowego.
 
@@ -18,7 +18,7 @@ def extract_temporal_features(window):
         dict: cechy czasowe
     """
     features = {}
-    axes = ['ac_x', 'ac_y', 'ac_z']
+    
 
     for axis in axes:
         signal = window[axis].values
@@ -48,9 +48,9 @@ def extract_temporal_features(window):
 
     # 7. SMA – Signal Magnitude Area (ze wszystkich osi)
     N = len(window)
-    sma = (np.sum(np.abs(window['ac_x'])) +
-           np.sum(np.abs(window['ac_y'])) +
-           np.sum(np.abs(window['ac_z']))) / N
+    sma = (np.sum(np.abs(window[axes[0]])) +
+           np.sum(np.abs(window[axes[1]])) +
+           np.sum(np.abs(window[axes[2]]))) / N
     features['sma'] = sma
 
     return features

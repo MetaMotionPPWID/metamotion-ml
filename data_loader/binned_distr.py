@@ -39,5 +39,5 @@ def calculate_binned_distribution_multi_axis(window, axes, bins=10, range_min=No
     """
     distributions = {}
     for axis in axes:
-        distributions[axis] = calculate_binned_distribution(window, column=axis, bins=bins, range_min=range_min, range_max=range_max)
+        distributions[f"binned_{axis}"] = calculate_binned_distribution(window, column=axis, bins=bins, range_min=range_min, range_max=range_max)
     return distributions
