@@ -5,7 +5,7 @@ from tqdm import tqdm
 class TimeWindowSegmenter:
     def __init__(
         self,
-        df_path,
+        df_path=None,
         window_size=10,
         source_sampling_rate=20,
         step_size=10,
@@ -25,7 +25,8 @@ class TimeWindowSegmenter:
         self.acc_columns = acc_columns
         self.gyr_columns = gyr_columns
         self.sampling_rate = source_sampling_rate
-        self.df = pd.read_parquet(df_path, engine="pyarrow")
+        if df_path:
+            self.df = pd.read_parquet(df_path, engine="pyarrow")
 
         if clean_columns:
             self._clean_columns()
